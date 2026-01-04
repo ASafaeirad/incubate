@@ -1,3 +1,9 @@
 node_modules/
+
+## Tanstack Router
 /dist
 /.tanstack
+
+## Storybook
+*storybook.log
+storybook-static
