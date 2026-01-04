@@ -5,5 +5,9 @@ export const Route = createFileRoute('/')({
 });
 
 function App() {
-  return <div>Incubate</div>;
+  return (
+    <div className="h-screen w-screen flex justify-center items-center">
+      Incubate
+    </div>
+  );
 }
