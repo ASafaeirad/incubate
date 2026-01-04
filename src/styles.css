@@ -11,7 +11,7 @@ body {
 :root {
   --font-sans: 'Inter Variable', sans-serif;
 
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.16 0 0);
   --foreground: oklch(0.985 0 0);
 
   --card: oklch(0.205 0 0);
@@ -29,6 +29,8 @@ body {
 
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
+
+  --disabled-foreground: oklch(0.708 0 0 / 50%);
 
   --accent: oklch(0.371 0 0);
   --accent-foreground: oklch(0.985 0 0);
@@ -84,6 +86,8 @@ body {
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
 
+  --color-disabled-foreground: var(--disabled-foreground);
+
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
 
@@ -107,4 +111,22 @@ body {
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+}
+
+.noise {
+  position: relative;
+  overflow: hidden;
+}
+
+body:before,
+.noise:before {
+  content: '';
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 182px;
+  opacity: 0.1;
+  inset: 0;
+  position: absolute;
+  pointer-events: none;
 }
