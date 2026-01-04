@@ -1,13 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+import { Button } from '../ui/Button/Button';
+
 export const Route = createFileRoute('/')({
   component: App,
 });
 
 function App() {
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
-      Incubate
+    <div className="flex h-screen w-screen items-center justify-center">
+      <Button>Hello</Button>
     </div>
   );
 }
