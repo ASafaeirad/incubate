@@ -1,7 +1,10 @@
 import '../src/styles.css';
-import type { Preview } from '@storybook/react-vite';
 
-const preview: Preview = {
+import addonA11y from '@storybook/addon-a11y';
+import { definePreview } from '@storybook/react-vite';
+
+export default definePreview({
+  addons: [addonA11y()],
   parameters: {
     controls: {
       matchers: {
@@ -9,11 +12,11 @@ const preview: Preview = {
         date: /date$/i,
       },
     },
-
     a11y: {
-      test: 'todo', // 'off' | 'todo' | 'error'
+      test: 'todo',
     },
   },
-};
-
-export default preview;
+  initialGlobals: {
+    backgrounds: { value: 'dark' },
+  },
+});
