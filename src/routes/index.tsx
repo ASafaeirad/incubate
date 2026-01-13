@@ -1,25 +1,39 @@
+import type { Day } from '#components/HabitCard/HabitCard';
+
 import { IconAssembly } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
-
-import { Card, CardDescription, CardHeader, CardTitle } from '../ui/Card/Card';
+import { HabitCard } from '#components/HabitCard/HabitCard';
+import { addDays } from 'date-fns';
 
 export const Route = createFileRoute('/')({
   component: App,
 });
 
+const days: Day[] = [
+  { date: addDays(new Date(), -10), state: 'done' },
+  { date: addDays(new Date(), -9), state: 'done' },
+  { date: addDays(new Date(), -8), state: 'done' },
+  { date: addDays(new Date(), -7), state: 'done' },
+  { date: addDays(new Date(), -6), state: 'done' },
+  { date: addDays(new Date(), -5), state: 'done' },
+  { date: addDays(new Date(), -4), state: 'done' },
+  { date: addDays(new Date(), -3), state: 'done' },
+  { date: addDays(new Date(), -2), state: 'missed' },
+  { date: addDays(new Date(), -1), state: 'missed' },
+  { date: new Date(), state: 'idle' },
+  { date: addDays(new Date(), 1), state: 'idle' },
+  { date: addDays(new Date(), 2), state: 'idle' },
+  { date: addDays(new Date(), 3), state: 'idle' },
+  { date: addDays(new Date(), 4), state: 'idle' },
+  { date: addDays(new Date(), 5), state: 'idle' },
+];
+
 function App() {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <Card className="noise w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-1 text-muted-foreground">
-            <IconAssembly className="size-4" /> Slot
-          </CardTitle>
-          <CardDescription className="text-disabled-foreground">
-            Add new routine
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <HabitCard state="idle" Icon={IconAssembly} days={days} title="My Habit">
+        This is my habit description.
+      </HabitCard>
     </div>
   );
 }

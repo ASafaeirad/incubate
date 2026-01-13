@@ -37,17 +37,17 @@ const meta = preview.meta({
 
 export const Default = meta.story();
 
+export const Primary = meta.story({
+  args: {
+    variant: 'primary',
+    children: 'Primary',
+  },
+});
+
 export const Secondary = meta.story({
   args: {
     variant: 'secondary',
     children: 'Secondary',
-  },
-});
-
-export const Ghost = meta.story({
-  args: {
-    variant: 'ghost',
-    children: 'Ghost',
   },
 });
 

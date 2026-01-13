@@ -5,18 +5,23 @@ import { cn } from '#lib/cn';
 import { cva } from 'class-variance-authority';
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 cursor-pointer items-center justify-center rounded-none border border-transparent bg-clip-padding text-xs font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  [
+    'group/button',
+    'inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding text-xs font-medium whitespace-nowrap transition-all select-none',
+    'outline-none focus-visible:ring-1',
+    'disabled:pointer-events-none disabled:opacity-50 border-border',
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    'hover:bg-background-hover',
+  ].join(' '),
   {
     variants: {
       variant: {
-        default:
-          'bg-primary text-primary-foreground focus-visible:bg-primary-highlight hover:bg-primary-highlight [a]:hover:bg-primary/80',
+        default: '',
+        primary: 'font-bold text-primary hover:bg-background-hover',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
-        ghost:
-          'hover:bg-muted hover:text-foreground dark:hover:bg-muted/50 aria-expanded:bg-muted aria-expanded:text-foreground',
         destructive:
-          'bg-destructive/10 hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 text-destructive focus-visible:border-destructive/40 dark:hover:bg-destructive/30',
+          'focus-visible:ring-destructive/40 bg-destructive-background text-background focus-visible:border-destructive/40 hover:bg-destructive/30',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
@@ -38,11 +43,13 @@ export function Button({
   className,
   variant = 'default',
   size = 'default',
+  type = 'button',
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants>) {
   return (
     <ButtonPrimitive
       data-slot="button"
+      type={type}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
