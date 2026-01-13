@@ -1,5 +1,6 @@
 import { IconAssembly } from '@tabler/icons-react';
 import preview from '#storybook/preview';
+import { addDays } from 'date-fns';
 
 import { HabitCard } from './HabitCard';
 
@@ -7,29 +8,94 @@ const meta = preview.meta({
   component: HabitCard,
   args: {
     days: [
-      { date: new Date('2024-06-01'), state: 'done' },
-      { date: new Date('2024-06-02'), state: 'done' },
-      { date: new Date('2024-06-03'), state: 'done' },
-      { date: new Date('2024-06-04'), state: 'done' },
-      { date: new Date('2024-06-05'), state: 'done' },
-      { date: new Date('2024-06-06'), state: 'done' },
-      { date: new Date('2024-06-07'), state: 'done' },
-      { date: new Date('2024-06-08'), state: 'missed' },
-      { date: new Date('2024-06-09'), state: 'missed' },
-      { date: new Date('2024-06-10'), state: 'done' },
-      { date: new Date(), state: 'idle' },
-      { date: new Date('2024-06-12'), state: 'idle' },
-      { date: new Date('2024-06-13'), state: 'idle' },
-      { date: new Date('2024-06-14'), state: 'idle' },
+      { date: addDays(new Date(), 0), state: 'idle' },
+      { date: addDays(new Date(), 1), state: 'idle' },
+      { date: addDays(new Date(), 2), state: 'idle' },
+      { date: addDays(new Date(), 3), state: 'idle' },
+      { date: addDays(new Date(), 4), state: 'idle' },
+      { date: addDays(new Date(), 5), state: 'idle' },
+      { date: addDays(new Date(), 6), state: 'idle' },
+      { date: addDays(new Date(), 7), state: 'idle' },
+      { date: addDays(new Date(), 8), state: 'idle' },
+      { date: addDays(new Date(), 9), state: 'idle' },
+      { date: addDays(new Date(), 10), state: 'idle' },
+      { date: addDays(new Date(), 11), state: 'idle' },
+      { date: addDays(new Date(), 12), state: 'idle' },
+      { date: addDays(new Date(), 13), state: 'idle' },
     ],
     title: 'My Habit',
     Icon: IconAssembly,
     children: 'This is my habit description.',
-    state: 'idle',
+    state: 'active',
   },
 });
 
 export const Default = meta.story();
+
+export const HalfDone = meta.story({
+  args: {
+    days: [
+      { date: addDays(new Date(), 0), state: 'done' },
+      { date: addDays(new Date(), 1), state: 'done' },
+      { date: addDays(new Date(), 2), state: 'done' },
+      { date: addDays(new Date(), 3), state: 'done' },
+      { date: addDays(new Date(), 4), state: 'done' },
+      { date: addDays(new Date(), 5), state: 'done' },
+      { date: addDays(new Date(), 6), state: 'done' },
+      { date: addDays(new Date(), 7), state: 'idle' },
+      { date: addDays(new Date(), 8), state: 'idle' },
+      { date: addDays(new Date(), 9), state: 'idle' },
+      { date: addDays(new Date(), 10), state: 'idle' },
+      { date: addDays(new Date(), 11), state: 'idle' },
+      { date: addDays(new Date(), 12), state: 'idle' },
+      { date: addDays(new Date(), 13), state: 'idle' },
+    ],
+  },
+});
+
+export const AllMissed = meta.story({
+  args: {
+    days: [
+      { date: addDays(new Date(), -14), state: 'missed' },
+      { date: addDays(new Date(), -13), state: 'missed' },
+      { date: addDays(new Date(), -12), state: 'missed' },
+      { date: addDays(new Date(), -11), state: 'missed' },
+      { date: addDays(new Date(), -10), state: 'missed' },
+      { date: addDays(new Date(), -9), state: 'missed' },
+      { date: addDays(new Date(), -8), state: 'missed' },
+      { date: addDays(new Date(), -7), state: 'missed' },
+      { date: addDays(new Date(), -6), state: 'missed' },
+      { date: addDays(new Date(), -5), state: 'missed' },
+      { date: addDays(new Date(), -4), state: 'missed' },
+      { date: addDays(new Date(), -3), state: 'missed' },
+      { date: addDays(new Date(), -2), state: 'missed' },
+      { date: addDays(new Date(), -1), state: 'missed' },
+      { date: addDays(new Date(), 0), state: 'idle' },
+    ],
+  },
+});
+
+export const MissedAfterProgress = meta.story({
+  args: {
+    days: [
+      { date: addDays(new Date(), -7), state: 'done' },
+      { date: addDays(new Date(), -6), state: 'done' },
+      { date: addDays(new Date(), -5), state: 'done' },
+      { date: addDays(new Date(), -4), state: 'done' },
+      { date: addDays(new Date(), -3), state: 'done' },
+      { date: addDays(new Date(), -2), state: 'missed' },
+      { date: addDays(new Date(), -1), state: 'done' },
+      { date: addDays(new Date(), 0), state: 'idle' },
+      { date: addDays(new Date(), 1), state: 'idle' },
+      { date: addDays(new Date(), 2), state: 'idle' },
+      { date: addDays(new Date(), 3), state: 'idle' },
+      { date: addDays(new Date(), 4), state: 'idle' },
+      { date: addDays(new Date(), 5), state: 'idle' },
+      { date: addDays(new Date(), 8), state: 'idle' },
+      { date: addDays(new Date(), 9), state: 'idle' },
+    ],
+  },
+});
 
 export const Active = meta.story({
   args: {

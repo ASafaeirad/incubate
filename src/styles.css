@@ -39,6 +39,8 @@ body {
   --destructive: oklch(67.249% 0.17455 21.763 / 0.7);
   --destructive-foreground: oklch(0.704 0.191 22.216);
 
+  --fire: oklch(79.543% 0.1551 66.647);
+
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
@@ -96,6 +98,7 @@ body {
 
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
+  --color-fire: var(--fire);
 
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-highlight: var(--primary-highlight);

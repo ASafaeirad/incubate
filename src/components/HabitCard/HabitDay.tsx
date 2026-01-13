@@ -1,7 +1,7 @@
 import { cn } from '#lib/cn';
 import { isToday } from 'date-fns';
 
-import type { Day } from './HabitCard';
+import type { Day } from './day';
 
 interface Props {
   day: Day;
@@ -15,7 +15,8 @@ export const HabitDay = ({ day }: Props) => {
         'bg-primary': day.state === 'done',
         'bg-destructive-background': day.state === 'missed',
         'bg-muted': day.state === 'idle',
-        'bg-foreground': isToday(day.date) && day.state === 'idle',
+        'border-foreground border bg-accent':
+          isToday(day.date) && day.state === 'idle',
       })}
     />
   );
