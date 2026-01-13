@@ -14,6 +14,9 @@ importers:
       '@fontsource-variable/inter':
         specifier: 5.2.8
         version: 5.2.8
+      '@fullstacksjs/toolbox':
+        specifier: 4.22.0
+        version: 4.22.0
       '@tabler/icons-react':
         specifier: 3.36.1
         version: 3.36.1(react@19.2.3)
@@ -26,6 +29,9 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
+      date-fns:
+        specifier: 4.1.0
+        version: 4.1.0
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -527,6 +533,10 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  '@fullstacksjs/toolbox@4.22.0':
+    resolution: {integrity: sha512-gr9YBfijzIMAAaqNQ8Wvdky+EH1oqRFTNLFU/xcJ4YoPurU1SeQDVjLsOKZiyBPgKAW62hedh7z1tdzcLqbrWw==}
+    engines: {node: '>=20'}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1665,6 +1675,9 @@ packages:
   data-view-byte-offset@1.0.1:
     resolution: {integrity: sha512-BS8PfmtDGnrgYdOonGZQdLZslWIeCGFP9tpan0hi1Co2Zr2NKADsvGYA8XxuG/4UWgJ6Cjtv+YJnB6MM69QGlQ==}
     engines: {node: '>= 0.4'}
+
+  date-fns@4.1.0:
+    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -3784,6 +3797,8 @@ snapshots:
       - tailwindcss
       - vitest
 
+  '@fullstacksjs/toolbox@4.22.0': {}
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.7':
@@ -5027,6 +5042,8 @@ snapshots:
       call-bound: 1.0.4
       es-errors: 1.3.0
       is-data-view: 1.0.2
+
+  date-fns@4.1.0: {}
 
   debug@4.4.3:
     dependencies:
