@@ -4,6 +4,7 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { client } from './lib/triplit/triplitClient';
 import { routeTree } from './routeTree.gen';
 
 const router = createRouter({
@@ -12,6 +13,9 @@ const router = createRouter({
   scrollRestoration: true,
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
+  context: {
+    triplit: client,
+  },
 });
 
 declare module '@tanstack/react-router' {

@@ -1,12 +1,11 @@
 import type { IconProps } from '@tabler/icons-react';
+import type { Day } from '#models/day';
 
 import { IconFlame } from '@tabler/icons-react';
 import { cn } from '#lib/cn';
+import { findStreak } from '#models/day';
 import { Button } from '#ui/Button/Button';
 
-import type { Day } from './day';
-
-import { findStreak } from './day';
 import { HabitDay } from './HabitDay';
 
 interface Props {
@@ -15,6 +14,7 @@ interface Props {
   days: Day[];
   Icon: React.FC<IconProps>;
   children: React.ReactNode;
+  onDelete?: () => void;
 }
 
 export const HabitCard = ({
@@ -23,11 +23,12 @@ export const HabitCard = ({
   state = 'idle',
   Icon,
   children,
+  onDelete,
 }: Props) => {
   const streak = findStreak(days);
 
   return (
-    <div className="noise w-full max-w-sm p-0">
+    <div className="noise w-full max-w-sm p-0 transition-all starting:translate-y-8 starting:opacity-0">
       <div className="flex border-b border-border p-0">
         <div className="flex flex-1 flex-col gap-1 p-4">
           <div className="flex items-center justify-between">
@@ -59,7 +60,9 @@ export const HabitCard = ({
           <Button variant="primary" className="flex-1 border-b">
             Track
           </Button>
-          <Button className="flex-1">Skip</Button>
+          <Button className="flex-1" onClick={onDelete}>
+            Skip
+          </Button>
         </div>
       </div>
       <div className="p-4">

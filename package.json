@@ -12,8 +12,10 @@
   "imports": {
     "#storybook/preview": "./.storybook/preview.ts",
     "#lib/cn": "./src/lib/cn.ts",
+    "#lib/triplit": "./src/lib/triplit/triplitClient.ts",
     "#components/*": "./src/components/*.tsx",
-    "#ui/*": "./src/ui/*.tsx"
+    "#ui/*": "./src/ui/*.tsx",
+    "#models/*": "./src/models/*.ts"
   },
   "scripts": {
     "lint": "eslint",
@@ -35,6 +37,7 @@
     "@tanstack/react-devtools": "0.9.0",
     "@tanstack/react-router-devtools": "1.144.0",
     "@tanstack/router-plugin": "1.145.2",
+    "@triplit/cli": "1.0.61",
     "@types/node": "25.0.3",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
@@ -55,6 +58,8 @@
     "@fullstacksjs/toolbox": "4.22.0",
     "@tabler/icons-react": "3.36.1",
     "@tanstack/react-router": "1.144.0",
+    "@triplit/client": "1.0.50",
+    "@triplit/react": "1.0.51",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
