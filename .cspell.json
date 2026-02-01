@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "vite",
+    "tanstack",
+    "callees",
+    "alireza",
+    "safaeirad",
+    "tabler",
+    "fontsource",
+    "fullstacksjs",
+    "autodocs"
+  ],
+  "ignorePaths": [
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    "node_modules/",
+    "dist/",
+    "convex/_generated/"
+  ]
+}
