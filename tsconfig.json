@@ -16,10 +16,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".storybook/**/*.ts",
-    ".storybook/**/*.tsx"
+  "include": [],
+  "exclude": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.spec.json" },
+    { "path": "./tsconfig.convex.json" },
+    { "path": "./tsconfig.vite.json" }
   ]
 }

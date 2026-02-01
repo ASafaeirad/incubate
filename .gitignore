@@ -1,5 +1,8 @@
 node_modules/
 
+## TypeScript
+*.tsbuildinfo
+
 ## Tanstack Router
 /dist
 /.tanstack

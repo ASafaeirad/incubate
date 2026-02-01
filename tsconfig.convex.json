@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./dist/tsconfig.convex.tsbuildinfo",
+    "types": ["node"]
+  },
+  "extends": "./tsconfig.json",
+  "include": ["convex/**/*.ts"],
+  "exclude": ["./convex/_generated"]
+}

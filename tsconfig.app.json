@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./dist/tsconfig.app.tsbuildinfo"
+  },
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/**/*.stories.tsx", "src/**/*.spec.ts", "src/**/*.spec.tsx"]
+}
