@@ -7,8 +7,8 @@ import { cva } from 'class-variance-authority';
 const buttonVariants = cva(
   [
     'group/button',
-    'inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding text-xs font-medium whitespace-nowrap transition-all select-none',
-    'outline-none focus-visible:ring-1',
+    'inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding font-medium whitespace-nowrap transition-all select-none',
+    'outline-none focus-visible:ring-1 ring-primary',
     'disabled:pointer-events-none disabled:opacity-50 border-border',
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
     'hover:bg-background-hover',
