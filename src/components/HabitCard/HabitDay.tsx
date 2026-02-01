@@ -1,7 +1,7 @@
+import type { Day } from '#models/day';
+
 import { cn } from '#lib/cn';
 import { isToday } from 'date-fns';
-
-import type { Day } from './day';
 
 interface Props {
   day: Day;

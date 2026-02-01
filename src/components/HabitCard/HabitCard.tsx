@@ -1,12 +1,11 @@
 import type { IconProps } from '@tabler/icons-react';
+import type { Day } from '#models/day';
 
 import { IconFlame } from '@tabler/icons-react';
 import { cn } from '#lib/cn';
+import { findStreak } from '#models/day';
 import { Button } from '#ui/Button/Button';
 
-import type { Day } from './day';
-
-import { findStreak } from './day';
 import { HabitDay } from './HabitDay';
 
 interface Props {

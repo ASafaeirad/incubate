@@ -1,4 +1,4 @@
-import type { Day } from '#components/HabitCard/HabitCard';
+import type { Day } from '#models/day';
 
 import { IconAssembly } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';

@@ -10,6 +10,7 @@
     "node": "24.12.0"
   },
   "imports": {
+    "#models/*": "./src/models/*.ts",
     "#storybook/preview": "./.storybook/preview.ts",
     "#lib/cn": "./src/lib/cn.ts",
     "#components/*": "./src/components/*.tsx",
@@ -18,7 +19,8 @@
   "scripts": {
     "lint": "eslint",
     "dev": "vite",
-    "build": "vite build && tsc",
+    "typecheck": "tsc -p tsconfig.app.json",
+    "build": "pnpm run typecheck && vite build",
     "preview": "vite preview",
     "test": "vitest --project=unit",
     "storybook:dev": "storybook dev -p 6006",
