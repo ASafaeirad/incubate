@@ -18,7 +18,9 @@
   },
   "scripts": {
     "lint": "eslint",
-    "dev": "vite",
+    "vite:dev": "vite",
+    "convex:dev": "convex dev",
+    "dev": "npm-run-all --parallel vite:dev convex:dev",
     "typecheck": "tsc -p tsconfig.app.json",
     "build": "pnpm run typecheck && vite build",
     "preview": "vite preview",
@@ -28,6 +30,7 @@
     "storybook:test": "vitest --project=storybook"
   },
   "devDependencies": {
+    "@convex-dev/eslint-plugin": "1.1.1",
     "@fullstacksjs/eslint-config": "13.13.3",
     "@storybook/addon-a11y": "10.1.11",
     "@storybook/addon-docs": "10.1.11",
@@ -44,6 +47,7 @@
     "@vitest/browser-playwright": "4.0.16",
     "@vitest/coverage-v8": "4.0.16",
     "eslint": "9.39.2",
+    "npm-run-all2": "8.0.4",
     "playwright": "1.57.0",
     "prettier": "3.7.4",
     "storybook": "10.1.11",
@@ -59,6 +63,7 @@
     "@tanstack/react-router": "1.144.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
+    "convex": "1.31.7",
     "date-fns": "4.1.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
