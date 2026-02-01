@@ -58,7 +58,9 @@ export const HabitCard = ({
           <Button variant="primary" className="flex-1 border-b">
             Track
           </Button>
-          <Button className="flex-1">Skip</Button>
+          <Button variant="ghost" className="flex-1">
+            Skip
+          </Button>
         </div>
       </div>
       <div className="p-4">

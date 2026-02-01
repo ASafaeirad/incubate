@@ -4,6 +4,7 @@ import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { ConvexAuthProvider } from './lib/convex/ConvexAuth';
 import { routeTree } from './routeTree.gen';
 
 const router = createRouter({
@@ -28,6 +29,8 @@ if (!rootElement) {
 
 ReactDOM.createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ConvexAuthProvider>
+      <RouterProvider router={router} />
+    </ConvexAuthProvider>
   </StrictMode>,
 );

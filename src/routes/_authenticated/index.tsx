@@ -3,10 +3,10 @@ import type { Day } from '#models/day';
 import { IconAssembly } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
 import { HabitCard } from '#components/HabitCard/HabitCard';
-import { addDays } from 'date-fns';
+import { addDays } from 'date-fns/addDays';
 
-export const Route = createFileRoute('/')({
-  component: App,
+export const Route = createFileRoute('/_authenticated/')({
+  component: RouteComponent,
 });
 
 const days: Day[] = [
@@ -28,9 +28,9 @@ const days: Day[] = [
   { date: addDays(new Date(), 5), state: 'idle' },
 ];
 
-function App() {
+function RouteComponent() {
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="flex h-full items-center justify-center">
       <HabitCard state="idle" Icon={IconAssembly} days={days} title="My Habit">
         This is my habit description.
       </HabitCard>

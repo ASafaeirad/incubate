@@ -10,6 +10,7 @@
     "node": "24.12.0"
   },
   "imports": {
+    "#convex/api": "./convex/_generated/api.js",
     "#models/*": "./src/models/*.ts",
     "#storybook/preview": "./.storybook/preview.ts",
     "#lib/cn": "./src/lib/cn.ts",
@@ -63,6 +64,7 @@
     "@fontsource-variable/inter": "5.2.8",
     "@fullstacksjs/toolbox": "4.22.0",
     "@tabler/icons-react": "3.36.1",
+    "@tanstack/react-form": "1.28.0",
     "@tanstack/react-router": "1.144.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
@@ -70,6 +72,7 @@
     "date-fns": "4.1.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "tailwind-merge": "3.4.0"
+    "tailwind-merge": "3.4.0",
+    "valibot": "1.2.0"
   }
 }
