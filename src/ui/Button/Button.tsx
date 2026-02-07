@@ -22,14 +22,14 @@ const buttonVariants = cva(
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
         destructive:
-          'focus-visible:ring-destructive/40 bg-destructive-background text-background focus-visible:border-destructive/40 hover:bg-destructive/30',
+          'focus-visible:ring-destructive/40 bg-destructive-background text-background focus-visible:border-destructive/40 hover:bg-destructive/40',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
         'default':
-          "h-7 gap-1 px-2.5 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        'sm': "h-6 gap-1 px-2 text-xs has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        'icon': 'size-7',
+          "h-8 gap-1 px-2.5 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        'sm': "h-6 gap-1 px-2 text-sm has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+        'icon': 'size-8 gap-1',
         'icon-sm': "size-6 [&_svg:not([class*='size-'])]:size-3",
       },
     },

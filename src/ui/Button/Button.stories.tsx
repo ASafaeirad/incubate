@@ -1,3 +1,4 @@
+import { IconStar } from '@tabler/icons-react';
 import preview from '#storybook/preview';
 
 import { Button } from './Button';
@@ -9,25 +10,25 @@ const meta = preview.meta({
   },
   render: args => (
     <div className="flex items-center gap-2">
-      <div>
+      <div className="flex items-center gap-1">
         <Button {...args} />
         <Button {...args} disabled />
         <Button {...args} size="icon" aria-label="Icon button">
-          &#9733;
+          <IconStar />
         </Button>
-        <Button {...args} size="icon" disabled aria-label="Icon button">
-          &#9733;
+        <Button {...args} size="icon" aria-label="Icon button" disabled>
+          <IconStar />
         </Button>
       </div>
 
-      <div>
+      <div className="flex items-center gap-1">
         <Button {...args} size="sm" />
         <Button {...args} size="sm" disabled />
         <Button {...args} size="icon-sm" aria-label="Icon button">
-          &#9733;
+          <IconStar />
         </Button>
         <Button {...args} size="icon-sm" disabled aria-label="Icon button">
-          &#9733;
+          <IconStar />
         </Button>
       </div>
     </div>
