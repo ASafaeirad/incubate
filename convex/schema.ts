@@ -12,6 +12,7 @@ const appTables = {
 const profileTables = {
   profiles: defineTable({
     name: v.string(),
+    experience: v.number(),
     userId: v.id('users'),
   }).index('by_user', ['userId']),
 };
