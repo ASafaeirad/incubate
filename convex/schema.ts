@@ -9,7 +9,15 @@ const appTables = {
   }).index('by_user', ['userId']),
 };
 
+const profileTables = {
+  profiles: defineTable({
+    name: v.string(),
+    userId: v.id('users'),
+  }).index('by_user', ['userId']),
+};
+
 export default defineSchema({
   ...authTables,
   ...appTables,
+  ...profileTables,
 });
