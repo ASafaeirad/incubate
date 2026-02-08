@@ -14,6 +14,7 @@ const profileTables = {
     name: v.string(),
     experience: v.number(),
     userId: v.id('users'),
+    avatar: v.nullable(v.string()),
   }).index('by_user', ['userId']),
 };
 

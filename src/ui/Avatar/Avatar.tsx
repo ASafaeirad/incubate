@@ -30,7 +30,7 @@ export function Avatar({
       <AvatarPrimitive.Fallback
         data-slot="avatar-fallback"
         className={cn(
-          'flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground',
+          'flex size-full w-full items-center justify-center overflow-hidden rounded-full bg-muted text-sm text-muted-foreground',
           className,
         )}
       >
