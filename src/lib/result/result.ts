@@ -17,7 +17,7 @@ export function ok<T = void>(value: T): Success<T> {
   };
 }
 
-export function err<E = unknown>(error: E): Failure<E> {
+export function err<const E = unknown>(error: E): Failure<E> {
   return {
     _tag: 'Failure',
     error,

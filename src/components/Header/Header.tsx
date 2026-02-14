@@ -8,8 +8,8 @@ import { useEffect } from 'react';
 
 export function Header() {
   const { signOut } = useAuthActions();
-  const profileResult = useQuery(api.profile.getProfile);
-  const createProfile = useMutation(api.profile.createProfile);
+  const profileResult = useQuery(api.profile.get);
+  const createProfile = useMutation(api.profile.create);
 
   useEffect(() => {
     if (!profileResult) return;

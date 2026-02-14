@@ -12,6 +12,9 @@ export default defineConfig(
       projectService: true,
       tsconfigRootDir: import.meta.dirname,
     },
+    rules: {
+      '@eslint-react/no-children-prop': 'off',
+    },
   },
   ...convexPlugin.configs.recommended,
 );

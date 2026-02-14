@@ -1,11 +1,14 @@
 import { getAuthUserId } from '@convex-dev/auth/server';
 import { err, ok } from '#lib/result';
 
-import type { Doc } from './_generated/dataModel';
+import type { Doc, Id } from './_generated/dataModel';
+import type { QueryCtx } from './_generated/server';
 
 import { mutation, query } from './_generated/server';
 
 export interface Profile {
+  userId: Id<'users'>;
+  id: Id<'profiles'>;
   name: string;
   experience: number;
   level: number;
@@ -17,6 +20,8 @@ function toProfile(data: Doc<'profiles'>): Profile {
   const { name, experience, avatar } = data;
   const level = Math.floor(experience / 100) + 1;
   return {
+    id: data._id,
+    userId: data.userId,
     name,
     experience,
     level,
@@ -25,7 +30,7 @@ function toProfile(data: Doc<'profiles'>): Profile {
   };
 }
 
-export const createProfile = mutation({
+export const create = mutation({
   args: {},
   handler: async ctx => {
     const userId = await getAuthUserId(ctx);
@@ -47,18 +52,20 @@ export const createProfile = mutation({
   },
 });
 
-export const getProfile = query({
+export const getProfileFromCtx = async (ctx: QueryCtx) => {
+  const userId = await getAuthUserId(ctx);
+  if (!userId) return err('Not authenticated');
+
+  const profile = await ctx.db
+    .query('profiles')
+    .withIndex('by_user', q => q.eq('userId', userId))
+    .first();
+  if (!profile) return err('Not Found');
+
+  return ok(toProfile(profile));
+};
+
+export const get = query({
   args: {},
-  handler: async ctx => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) return err('Not authenticated');
-
-    const profile = await ctx.db
-      .query('profiles')
-      .withIndex('by_user', q => q.eq('userId', userId))
-      .first();
-    if (!profile) return err('Not Found');
-
-    return ok(toProfile(profile));
-  },
+  handler: getProfileFromCtx,
 });
