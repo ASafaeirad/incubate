@@ -1,10 +1,15 @@
+allowBuilds:
+  core-js: true
+  esbuild: true
+  unrs-resolver: true
+  vite: true
+
+blockExoticSubdeps: true
+
+minimumReleaseAge: 2880
+
 savePrefix: ''
 
-minimumReleaseAge: 2880 # 2 days in minutes
-trustPolicy: no-downgrade
-blockExoticSubdeps: true
-strictDepBuilds: true # Might become default behavior in pnpm v11
+strictDepBuilds: true
 
-allowBuilds:
-  vite: true
-  core-js: true
+trustPolicy: no-downgrade
