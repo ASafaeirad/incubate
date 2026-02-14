@@ -6,8 +6,6 @@ allowBuilds:
 
 blockExoticSubdeps: true
 
-minimumReleaseAge: 2880
-
 savePrefix: ''
 
 strictDepBuilds: true

@@ -29,8 +29,8 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/auth': typeof AuthRoute
   '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -44,7 +44,7 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/auth' | '/'
+  fullPaths: '/' | '/auth'
   fileRoutesByTo: FileRoutesByTo
   to: '/auth' | '/'
   id: '__root__' | '/_authenticated' | '/auth' | '/_authenticated/'
@@ -67,7 +67,7 @@ declare module '@tanstack/react-router' {
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
