@@ -11,5 +11,3 @@ minimumReleaseAge: 2880
 savePrefix: ''
 
 strictDepBuilds: true
-
-trustPolicy: no-downgrade
