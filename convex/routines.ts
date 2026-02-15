@@ -9,28 +9,36 @@ import { mutation, query } from './_generated/server';
 import { getUserIdFromCtx } from './auth';
 import { getProfileFromCtx } from './profile';
 
-export interface Slot {
-  id: Id<'slots'>;
+export type RoutineState = 'achieve' | 'active' | 'broken' | 'incubating';
+
+export interface Routine {
+  id: Id<'routines'>;
   name: string;
+  state: RoutineState;
 }
 
-const toSlot = (slot: { _id: Id<'slots'>; name: string }): Slot => {
+const toRoutine = (routine: {
+  _id: Id<'routines'>;
+  name: string;
+  state: RoutineState;
+}): Routine => {
   return {
-    id: slot._id,
-    name: slot.name,
+    id: routine._id,
+    name: routine.name,
+    state: routine.state,
   };
 };
 
-export const getSlotsFromContext = async (ctx: QueryCtx) => {
+export const getRoutinesFromContext = async (ctx: QueryCtx) => {
   const userId = await getUserIdFromCtx(ctx);
   if (isErr(userId)) return userId;
 
-  const slots = await ctx.db
-    .query('slots')
+  const routines = await ctx.db
+    .query('routines')
     .withIndex('by_user', q => q.eq('userId', userId.value))
     .collect();
 
-  return ok(slots.map(toSlot));
+  return ok(routines.map(toRoutine));
 };
 
 export const create = mutation({
@@ -41,15 +49,16 @@ export const create = mutation({
     const profile = await getProfileFromCtx(ctx);
     if (isErr(profile)) return profile;
 
-    const slots = await getSlotsFromContext(ctx);
-    if (isErr(slots)) return slots;
+    const routines = await getRoutinesFromContext(ctx);
+    if (isErr(routines)) return routines;
 
-    if (profile.value.slots <= slots.value.length)
-      return err('No slots available');
+    if (profile.value.routines <= routines.value.length)
+      return err('No routines available');
 
-    const id = await ctx.db.insert('slots', {
+    const id = await ctx.db.insert('routines', {
       name: args.name,
       userId: profile.value.userId,
+      state: 'incubating',
     });
     return ok(id);
   },
@@ -57,17 +66,17 @@ export const create = mutation({
 
 export const remove = mutation({
   args: {
-    id: v.id('slots'),
+    id: v.id('routines'),
   },
   handler: async (ctx, { id }) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) throw new Error('Not authenticated');
 
-    return ctx.db.delete('slots', id);
+    return ctx.db.delete('routines', id);
   },
 });
 
 export const list = query({
   args: {},
-  handler: getSlotsFromContext,
+  handler: getRoutinesFromContext,
 });

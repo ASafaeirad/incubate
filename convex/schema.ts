@@ -3,9 +3,15 @@ import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
 const appTables = {
-  slots: defineTable({
+  routines: defineTable({
     name: v.string(),
     userId: v.id('users'),
+    state: v.union(
+      v.literal('incubating'),
+      v.literal('active'),
+      v.literal('broken'),
+      v.literal('achieve'),
+    ),
   }).index('by_user', ['userId']),
 };
 

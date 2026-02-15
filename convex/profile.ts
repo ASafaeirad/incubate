@@ -12,7 +12,7 @@ export interface Profile {
   name: string;
   experience: number;
   level: number;
-  slots: number;
+  routines: number;
   avatar?: string;
 }
 
@@ -25,7 +25,7 @@ function toProfile(data: Doc<'profiles'>): Profile {
     name,
     experience,
     level,
-    slots: level + 1,
+    routines: level + 1,
     avatar: avatar ?? undefined,
   };
 }

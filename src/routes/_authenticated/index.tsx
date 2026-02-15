@@ -11,8 +11,8 @@ export const Route = createFileRoute('/_authenticated/')({
 });
 
 function RouteComponent() {
-  const removeSlot = useMutation(api.slots.remove);
-  const slotsResult = useQuery(api.slots.list);
+  const removeRoutine = useMutation(api.routines.remove);
+  const routinesResult = useQuery(api.routines.list);
   const profileResult = useQuery(api.profile.get);
 
   if (!profileResult) {
@@ -23,39 +23,41 @@ function RouteComponent() {
     return <div>Error loading profile: {profileResult.error}</div>;
   }
 
-  if (!slotsResult) {
+  if (!routinesResult) {
     return <div>Loading...</div>;
   }
 
-  if (isErr(slotsResult)) {
-    return <div>Error loading slots: {slotsResult.error}</div>;
+  if (isErr(routinesResult)) {
+    return <div>Error loading routines: {routinesResult.error}</div>;
   }
 
-  const slots = slotsResult.value;
+  const routines = routinesResult.value;
   const profile = profileResult.value;
 
-  const isSlotAvailable = profile.slots > slots.length;
+  const isRoutineAvailable = profile.routines > routines.length;
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4">
       <div className="flex gap-2">
-        {slots.map(slot => (
+        {routines.map(routine => (
           <div
             className="flex flex-col gap-2 border border-border p-2"
-            key={slot.id}
+            key={routine.id}
           >
-            <span className="flex items-center px-2 py-1">{slot.name}</span>
-            <Button onClick={() => removeSlot({ id: slot.id })}>Delete</Button>
+            <span className="flex items-center px-2 py-1">{routine.name}</span>
+            <Button onClick={() => removeRoutine({ id: routine.id })}>
+              Delete
+            </Button>
           </div>
         ))}
-        {isSlotAvailable && <NewSlot />}
+        {isRoutineAvailable && <NewRoutine />}
       </div>
     </div>
   );
 }
 
-function NewSlot() {
-  const createSlot = useMutation(api.slots.create);
+function NewRoutine() {
+  const createRoutine = useMutation(api.routines.create);
 
   const form = useAppForm({
     defaultValues: { name: '' },
@@ -63,10 +65,10 @@ function NewSlot() {
       onChange: v.object({ name: v.pipe(v.string(), v.minLength(1, 'No')) }),
     },
     onSubmit: async ({ value, formApi }) => {
-      const result = await createSlot({ name: value.name });
+      const result = await createRoutine({ name: value.name });
 
       if (isErr(result)) {
-        console.error(`Error creating slot: ${result.error}`);
+        console.error(`Error creating routine: ${result.error}`);
         return;
       }
 
@@ -74,9 +76,9 @@ function NewSlot() {
     },
   });
 
-  const slotsResult = useQuery(api.slots.list);
+  const routinesResult = useQuery(api.routines.list);
 
-  if (!slotsResult) {
+  if (!routinesResult) {
     return <div>Loading...</div>;
   }
 
@@ -93,7 +95,7 @@ function NewSlot() {
         children={field => <field.TextField placeholder="Name" />}
       />
       <form.AppForm>
-        <form.SubmitButton>Create Slot</form.SubmitButton>
+        <form.SubmitButton>Create Routine</form.SubmitButton>
       </form.AppForm>
     </form>
   );
