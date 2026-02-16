@@ -16,5 +16,14 @@ export default defineConfig(
       '@eslint-react/no-children-prop': 'off',
     },
   },
-  ...convexPlugin.configs.recommended,
+  {
+    files: ['**/convex/**/*.ts'],
+    plugins: {
+      '@convex-dev': convexPlugin.configs.recommended.plugins['@convex-dev'],
+    },
+    rules: {
+      ...convexPlugin.configs.recommended.rules,
+      'no-await-in-loop': 'off',
+    },
+  },
 );

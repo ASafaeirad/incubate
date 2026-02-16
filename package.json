@@ -4,7 +4,7 @@
   "description": "A habit-building game that rewards proven commitment, not intention.",
   "author": "Alireza Safaeirad <frontendmonster@gmail.com>",
   "license": "MIT",
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.29.0",
   "type": "module",
   "engines": {
     "node": ">=24.12.0"
@@ -61,8 +61,10 @@
     "vitest": "4.0.18"
   },
   "dependencies": {
+    "@auth/core": "0.37.4",
     "@base-ui/react": "1.2.0",
     "@convex-dev/auth": "0.0.90",
+    "@convex-dev/migrations": "0.3.1",
     "@fontsource-variable/inter": "5.2.8",
     "@fullstacksjs/toolbox": "4.22.0",
     "@tabler/icons-react": "3.36.1",
