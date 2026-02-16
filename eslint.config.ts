@@ -18,11 +18,9 @@ export default defineConfig(
   },
   {
     files: ['**/convex/**/*.ts'],
-    plugins: {
-      '@convex-dev': convexPlugin.configs.recommended.plugins['@convex-dev'],
-    },
+    ...convexPlugin.configs.recommended[0],
     rules: {
-      ...convexPlugin.configs.recommended.rules,
+      ...convexPlugin.configs.recommended[0].rules,
       'no-await-in-loop': 'off',
     },
   },
