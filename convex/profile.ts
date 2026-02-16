@@ -1,34 +1,10 @@
 import { getAuthUserId } from '@convex-dev/auth/server';
-import { err, ok } from '#lib/result';
+import { err, isErr, ok } from '#lib/result';
+import { toProfile } from '#models/profile';
 
-import type { Doc, Id } from './_generated/dataModel';
-import type { QueryCtx } from './_generated/server';
+import type { MutationCtx, QueryCtx } from './_generated/server';
 
 import { mutation, query } from './_generated/server';
-
-export interface Profile {
-  userId: Id<'users'>;
-  id: Id<'profiles'>;
-  name: string;
-  experience: number;
-  level: number;
-  routines: number;
-  avatar?: string;
-}
-
-function toProfile(data: Doc<'profiles'>): Profile {
-  const { name, experience, avatar } = data;
-  const level = Math.floor(experience / 100) + 1;
-  return {
-    id: data._id,
-    userId: data.userId,
-    name,
-    experience,
-    level,
-    routines: level + 1,
-    avatar: avatar ?? undefined,
-  };
-}
 
 export const create = mutation({
   args: {},
@@ -44,6 +20,7 @@ export const create = mutation({
       name: user.name ?? 'Anonymous',
       experience: 0,
       avatar: user.image ?? null,
+      timezone: 'UTC',
     });
     const profile = await ctx.db.get('profiles', id);
     if (!profile) return err('Convex bug: profile not found');
@@ -52,7 +29,7 @@ export const create = mutation({
   },
 });
 
-export const getProfileFromCtx = async (ctx: QueryCtx) => {
+export const getProfileFromCtx = async (ctx: MutationCtx | QueryCtx) => {
   const userId = await getAuthUserId(ctx);
   if (!userId) return err('Not authenticated');
 
@@ -64,6 +41,22 @@ export const getProfileFromCtx = async (ctx: QueryCtx) => {
 
   return ok(toProfile(profile));
 };
+
+export async function increaseUserXp(
+  ctx: MutationCtx,
+  params: {
+    amount: number;
+  },
+) {
+  const { amount } = params;
+  const profileResult = await getProfileFromCtx(ctx);
+  if (isErr(profileResult)) return profileResult;
+  const profile = profileResult.value;
+
+  const newTotalXP = profile.experience + amount;
+  await ctx.db.patch('profiles', profile.id, { experience: newTotalXP });
+  return ok({ profileId: profile.id, experience: newTotalXP });
+}
 
 export const get = query({
   args: {},

@@ -1,14 +1,16 @@
-import { Progress, type ProgressRootProps } from '@base-ui/react';
+import type { ProgressRootProps } from '@base-ui/react';
+
+import { Progress } from '@base-ui/react';
 import { clamp } from '@fullstacksjs/toolbox';
 import { cn } from '#lib/cn';
 
 interface ProgressBarProps extends ProgressRootProps {
   value: number;
-  label?: string;
+  label?: React.ReactNode;
 }
 
 export function ProgressBar({
-  value = 0,
+  value,
   className,
   label,
   min = 0,
@@ -28,7 +30,7 @@ export function ProgressBar({
       max={max}
       value={clampedValue}
     >
-      <Progress.Track className="bg-muted col-start-1 col-end-3 h-1">
+      <Progress.Track className="col-start-1 col-end-3 h-1 bg-muted">
         <Progress.Indicator className="bg-primary" />
       </Progress.Track>
       <Progress.Label>{label}</Progress.Label>

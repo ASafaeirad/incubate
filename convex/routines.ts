@@ -1,5 +1,12 @@
 import { getAuthUserId } from '@convex-dev/auth/server';
 import { err, isErr, ok } from '#lib/result';
+import { getZonedStartOfDayTimestamp } from '#models/date';
+import {
+  calculateStreakUpdate,
+  isCompletedIncubation,
+  toRoutine,
+} from '#models/routine';
+import { calculateDailyCompletionXP } from '#models/xp';
 import { v } from 'convex/values';
 
 import type { Id } from './_generated/dataModel';
@@ -8,28 +15,24 @@ import type { QueryCtx } from './_generated/server';
 import { mutation, query } from './_generated/server';
 import { getUserIdFromCtx } from './auth';
 import { getProfileFromCtx } from './profile';
+import { checkAndAwardIncubationBonus, logXpTransaction } from './xp';
 
-export type RoutineState = 'achieve' | 'active' | 'broken' | 'incubating';
+export const getRoutine = async (
+  ctx: QueryCtx,
+  params: { routineId: Id<'routines'> },
+) => {
+  const userIdResult = await getUserIdFromCtx(ctx);
+  if (isErr(userIdResult)) return userIdResult;
+  const userId = userIdResult.value;
 
-export interface Routine {
-  id: Id<'routines'>;
-  name: string;
-  state: RoutineState;
-}
+  const routine = await ctx.db.get('routines', params.routineId);
+  if (!routine) return err('Routine not found');
+  if (routine.userId !== userId) return err('Unauthorized');
 
-const toRoutine = (routine: {
-  _id: Id<'routines'>;
-  name: string;
-  state: RoutineState;
-}): Routine => {
-  return {
-    id: routine._id,
-    name: routine.name,
-    state: routine.state,
-  };
+  return ok(toRoutine(routine));
 };
 
-export const getRoutinesFromContext = async (ctx: QueryCtx) => {
+export const getRoutines = async (ctx: QueryCtx) => {
   const userId = await getUserIdFromCtx(ctx);
   if (isErr(userId)) return userId;
 
@@ -49,7 +52,7 @@ export const create = mutation({
     const profile = await getProfileFromCtx(ctx);
     if (isErr(profile)) return profile;
 
-    const routines = await getRoutinesFromContext(ctx);
+    const routines = await getRoutines(ctx);
     if (isErr(routines)) return routines;
 
     if (profile.value.routines <= routines.value.length)
@@ -59,7 +62,12 @@ export const create = mutation({
       name: args.name,
       userId: profile.value.userId,
       state: 'incubating',
+      currentStreak: 0,
+      lastCompletion: null,
+      createdAt: Date.now(),
+      timezone: profile.value.timezone,
     });
+
     return ok(id);
   },
 });
@@ -78,5 +86,61 @@ export const remove = mutation({
 
 export const list = query({
   args: {},
-  handler: getRoutinesFromContext,
+  handler: getRoutines,
+});
+
+export const complete = mutation({
+  args: {
+    routineId: v.id('routines'),
+  },
+  handler: async (ctx, { routineId }) => {
+    const routineResult = await getRoutine(ctx, { routineId });
+    if (isErr(routineResult)) return routineResult;
+    const routine = routineResult.value;
+
+    const profileResult = await getProfileFromCtx(ctx);
+    if (isErr(profileResult)) return profileResult;
+    const profile = profileResult.value;
+    const { timezone, userId } = profile;
+
+    const now = Date.now();
+    const dayStartTimestamp = getZonedStartOfDayTimestamp(now, timezone);
+
+    const existingCompletion = await ctx.db
+      .query('completions')
+      .withIndex('by_routine_day', q =>
+        q.eq('routineId', routineId).eq('dayStartTimestamp', dayStartTimestamp),
+      )
+      .first();
+    if (existingCompletion) return err('Already completed today');
+
+    const { newStreak, newState } = calculateStreakUpdate(routine);
+
+    await ctx.db.insert('completions', {
+      routineId,
+      userId,
+      completedAt: now,
+      dayStartTimestamp,
+    });
+
+    await ctx.db.patch('routines', routineId, {
+      lastCompletion: now,
+      currentStreak: newStreak,
+      state: newState,
+    });
+
+    await logXpTransaction(ctx, {
+      userId,
+      amount: calculateDailyCompletionXP(newStreak),
+      source: 'daily_completion',
+      metadata: {
+        routineId,
+        streakDays: newStreak,
+      },
+    });
+
+    if (routine.state === 'incubating' && isCompletedIncubation(newStreak)) {
+      await checkAndAwardIncubationBonus(ctx, { routine, profile });
+    }
+  },
 });
