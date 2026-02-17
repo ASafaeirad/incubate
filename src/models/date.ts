@@ -11,7 +11,5 @@ export function getZonedStartOfDayTimestamp(
   timestamp: number,
   timezone: string,
 ): number {
-  return startOfDay(new TZDate(timestamp, timezone))
-    .withTimeZone('UTC')
-    .getTime();
+  return startOfDay(new TZDate(timestamp, timezone)).getTime();
 }
