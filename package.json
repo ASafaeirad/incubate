@@ -4,7 +4,7 @@
   "description": "A habit-building game that rewards proven commitment, not intention.",
   "author": "Alireza Safaeirad <frontendmonster@gmail.com>",
   "license": "MIT",
-  "packageManager": "pnpm@10.29.0",
+  "packageManager": "pnpm@10.29.3",
   "type": "module",
   "engines": {
     "node": ">=24.12.0"
