@@ -45,10 +45,10 @@ export function Header() {
             label={`${currentXp} / ${nextLevelXp}`}
           />
         </div>
-        <Button className="align-self-end" onClick={signOut}>
-          <IconLogout />
-        </Button>
       </div>
+      <Button className="align-self-end" onClick={signOut}>
+        <IconLogout />
+      </Button>
     </header>
   );
 }

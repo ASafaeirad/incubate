@@ -1,8 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { NewRoutine } from '#components/Routine/NewRoutine';
-import { RoutineCard } from '#components/Routine/RoutineCard';
+import {
+  RoutineCard,
+  RoutineCardSkeleton,
+} from '#components/Routine/RoutineCard';
 import { api } from '#convex/api';
 import { isErr } from '#lib/result';
+import { Skeleton } from '#ui/Skeleton/Skeleton';
 import { useMutation, useQuery } from 'convex/react';
 
 export const Route = createFileRoute('/_authenticated/')({
@@ -15,16 +19,16 @@ function RouteComponent() {
   const completeRoutine = useMutation(api.routines.complete);
   const removeRoutine = useMutation(api.routines.remove);
 
-  if (!profileResult) {
-    return <div>Loading...</div>;
+  if (!profileResult || !routinesResult) {
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-4">
+        <RoutineCardSkeleton />
+      </div>
+    );
   }
 
   if (isErr(profileResult)) {
     return <div>Error loading profile: {profileResult.error}</div>;
-  }
-
-  if (!routinesResult) {
-    return <div>Loading...</div>;
   }
 
   if (isErr(routinesResult)) {

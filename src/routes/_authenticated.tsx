@@ -9,7 +9,7 @@ export const Route = createFileRoute('/_authenticated')({
 function RouteComponent() {
   const { isLoading, isAuthenticated } = useConvexAuth();
 
-  if (isLoading) return <div>Loading…</div>;
+  if (isLoading) return null;
   if (!isAuthenticated) return <Navigate to="/auth" />;
 
   return (

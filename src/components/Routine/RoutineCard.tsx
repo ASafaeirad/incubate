@@ -7,6 +7,7 @@ import { Badge } from '#ui/Badge/Badge';
 import { Button } from '#ui/Button/Button';
 import { Card, CardContent, CardHeader } from '#ui/Card/Card';
 import { Heading } from '#ui/Heading/Heading';
+import { Skeleton } from '#ui/Skeleton/Skeleton';
 
 interface Props {
   routine: Routine;
@@ -59,6 +60,27 @@ export const RoutineCard = ({
         ) : (
           <Button onClick={onComplete}>Track</Button>
         )}
+      </CardContent>
+    </Card>
+  );
+};
+
+export const RoutineCardSkeleton = () => {
+  return (
+    <Card className="w-96">
+      <CardHeader className="border-b">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-5 w-32" />
+          <Skeleton className="h-5 w-16" />
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        <div className="grid grid-cols-7 gap-1">
+          {range(21).map(i => (
+            <Skeleton key={i} className="h-2 w-full" />
+          ))}
+        </div>
+        <Skeleton className="h-8 w-full" />
       </CardContent>
     </Card>
   );
