@@ -120,6 +120,10 @@ body {
 
   --text-xs: 0.5rem;
   --text-sm: 0.75rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.3rem;
+  --text-2xl: 1.4rem;
+  --text-3xl: 1.5rem;
 }
 
 .noise {
