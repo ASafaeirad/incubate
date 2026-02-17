@@ -6,7 +6,6 @@ import {
 } from '#components/Routine/RoutineCard';
 import { api } from '#convex/api';
 import { isErr } from '#lib/result';
-import { Skeleton } from '#ui/Skeleton/Skeleton';
 import { useMutation, useQuery } from 'convex/react';
 
 export const Route = createFileRoute('/_authenticated/')({
