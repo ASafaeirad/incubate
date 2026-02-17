@@ -1,12 +1,7 @@
 import preview from '#storybook/preview';
+import { Heading } from '#ui/Heading/Heading';
 
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from './Card';
+import { Card, CardDescription, CardFooter, CardHeader } from './Card';
 
 const meta = preview.meta({
   component: Card,
@@ -19,7 +14,7 @@ const meta = preview.meta({
         className="relative aspect-video w-full object-cover brightness-60 grayscale"
       />
       <CardHeader>
-        <CardTitle>Observability Plus is replacing Monitoring</CardTitle>
+        <Heading level="h3">Observability Plus is replacing Monitoring</Heading>
         <CardDescription>
           Switch to the improved way to explore your data, with natural
           language. Monitoring will no longer be available on the Pro plan in
