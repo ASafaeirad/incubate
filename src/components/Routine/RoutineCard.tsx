@@ -1,25 +1,12 @@
-import type { Routine } from '#models/routine';
+import type { Routine, RoutineState } from '#models/routine';
 
+import { range } from '@fullstacksjs/toolbox';
+import { IconTarget } from '@tabler/icons-react';
+import { cn } from '#lib/cn';
+import { Badge } from '#ui/Badge/Badge';
 import { Button } from '#ui/Button/Button';
-
-const getStateColor = (state: string) => {
-  switch (state) {
-    case 'incubating':
-      return 'bg-muted text-muted-foreground';
-
-    case 'active':
-      return 'bg-primary text-primary-foreground';
-
-    case 'broken':
-      return 'bg-destructive-background text-destructive';
-
-    case 'achieve':
-      return 'bg-fire text-primary-foreground';
-
-    default:
-      return 'bg-muted text-muted-foreground';
-  }
-};
+import { Card, CardContent, CardHeader } from '#ui/Card/Card';
+import { Heading } from '#ui/Heading/Heading';
 
 interface Props {
   routine: Routine;
@@ -27,56 +14,52 @@ interface Props {
   onDelete?: () => void;
 }
 
-export const RoutineCard = ({ routine, onComplete, onDelete }: Props) => {
+const iconMap: Record<RoutineState, typeof IconTarget> = {
+  incubating: IconTarget,
+  active: IconTarget,
+  achieve: IconTarget,
+  broken: IconTarget,
+};
+
+export const RoutineCard = ({
+  routine,
+  onComplete,
+  onDelete: _onDelete,
+}: Props) => {
+  const Icon = iconMap[routine.state];
+
   return (
-    <div className="rounded-lg flex w-64 flex-col gap-3 border border-border p-4">
-      <div className="flex items-start justify-between">
-        <h3 className="text-lg font-semibold">{routine.name}</h3>
-        <span
-          className={`rounded-sm px-2 py-1 text-xs font-medium uppercase ${getStateColor(routine.state)}`}
-        >
-          {routine.state}
-        </span>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">Current Streak:</span>
-          <span className="font-bold text-foreground">
-            {routine.currentStreak} days
-          </span>
+    <Card className="w-96">
+      <CardHeader className="border-b">
+        <div className="flex items-center justify-between">
+          <Heading level="h3">{routine.name}</Heading>
+          <Badge>
+            <Icon data-icon="inline-start" className="size-3" />
+            {routine.state}
+          </Badge>
         </div>
-
-        {routine.state === 'incubating' && (
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Days to Active:</span>
-            <span className="font-bold text-foreground">
-              {routine.daysRemaining} days
-            </span>
-          </div>
-        )}
-
-        {routine.completedToday && (
-          <div className="rounded-sm bg-primary/10 px-3 py-2 text-center text-sm font-medium text-primary">
-            ✓ Completed Today
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <div className="flex gap-2">
-          <Button
-            onClick={onComplete}
-            disabled={routine.completedToday}
-            className="flex-1"
-          >
-            {routine.completedToday ? 'Done' : 'Complete'}
-          </Button>
-          <Button onClick={onDelete} className="shrink-0">
-            Delete
-          </Button>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        <div className="grid grid-cols-7 gap-1">
+          {range(21).map(i => (
+            <div
+              key={i}
+              className={cn('h-2', {
+                'bg-foreground': routine.currentStreak > i + 1,
+                'bg-primary': routine.currentStreak === i + 1,
+                'bg-muted': routine.currentStreak < i + 1,
+              })}
+            />
+          ))}
         </div>
-      </div>
-    </div>
+        {routine.completedToday ? (
+          <div className="flex h-8 items-center justify-center bg-primary/10 text-primary">
+            Completed
+          </div>
+        ) : (
+          <Button onClick={onComplete}>Track</Button>
+        )}
+      </CardContent>
+    </Card>
   );
 };
