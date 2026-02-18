@@ -65,7 +65,6 @@ export const create = mutation({
       currentStreak: 0,
       lastCompletion: null,
       createdAt: Date.now(),
-      timezone: profile.value.timezone,
     });
 
     return ok(id);

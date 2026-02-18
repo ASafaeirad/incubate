@@ -15,7 +15,6 @@ const appTables = {
     currentStreak: v.number(),
     lastCompletion: v.nullable(v.number()),
     createdAt: v.number(),
-    timezone: v.string(),
   }).index('by_user', ['userId']),
   completions: defineTable({
     routineId: v.id('routines'),
