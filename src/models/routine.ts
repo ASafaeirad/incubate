@@ -12,16 +12,11 @@ export interface Routine {
   name: string;
   state: RoutineState;
   currentStreak: number;
-  daysRemaining: number;
   completedToday: boolean;
   lastCompletion?: number;
 }
 
 export const toRoutine = (routine: Doc<'routines'>): Routine => {
-  const daysRemaining =
-    routine.state === 'incubating'
-      ? Math.max(0, streakToActivate - routine.currentStreak)
-      : 0;
   const completedToday =
     routine.lastCompletion != null && isToday(routine.lastCompletion);
 
@@ -31,7 +26,7 @@ export const toRoutine = (routine: Doc<'routines'>): Routine => {
     name: routine.name,
     state: routine.state,
     currentStreak: routine.currentStreak,
-    daysRemaining,
+    lastCompletion: routine.lastCompletion ?? undefined,
     completedToday,
   };
 };
