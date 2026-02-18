@@ -144,3 +144,7 @@ body:before,
   position: absolute;
   pointer-events: none;
 }
+
+body:before {
+  position: fixed;
+}
