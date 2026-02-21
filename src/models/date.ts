@@ -1,5 +1,5 @@
 import { TZDate } from '@date-fns/tz';
-import { startOfDay } from 'date-fns';
+import { isToday, startOfDay } from 'date-fns';
 
 /**
  * Utility function to get the start of the day in UTC milliseconds for a given timestamp and timezone.
@@ -13,3 +13,21 @@ export function getZonedStartOfDayTimestamp(
 ): number {
   return startOfDay(new TZDate(timestamp, timezone)).getTime();
 }
+
+export function toTimeZonedDate(timestamp: number, timezone: string): Date {
+  const date = new Date(timestamp);
+
+  return new TZDate(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    timezone,
+  );
+}
+
+export const isTodayInTimezone = (
+  timestamp: number,
+  timezone: string,
+): boolean => {
+  return isToday(toTimeZonedDate(timestamp, timezone));
+};
