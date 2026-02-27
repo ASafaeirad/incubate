@@ -48,6 +48,7 @@ function RouteComponent() {
             routine={routine}
             onComplete={() => completeRoutine({ routineId: routine.id })}
             onDelete={() => removeRoutine({ id: routine.id })}
+            timezone={profile.timezone}
           />
         ))}
         {isRoutineAvailable && <NewRoutine />}

@@ -1,8 +1,4 @@
-import { isNull } from '@fullstacksjs/toolbox';
-
 import type { Doc, Id } from '../../convex/_generated/dataModel';
-
-import { isTodayInTimezone } from './date';
 
 const streakToActivate = 21;
 
@@ -14,15 +10,10 @@ export interface Routine {
   name: string;
   state: RoutineState;
   currentStreak: number;
-  completedToday: boolean;
   lastCompletion?: number;
 }
 
 export const toRoutine = (routine: Doc<'routines'>): Routine => {
-  const completedToday =
-    !isNull(routine.lastCompletion) &&
-    isTodayInTimezone(routine.lastCompletion, 'Europe/Amsterdam');
-
   return {
     id: routine._id,
     userId: routine.userId,
@@ -30,7 +21,6 @@ export const toRoutine = (routine: Doc<'routines'>): Routine => {
     state: routine.state,
     currentStreak: routine.currentStreak,
     lastCompletion: routine.lastCompletion ?? undefined,
-    completedToday,
   };
 };
 

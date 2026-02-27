@@ -1,6 +1,5 @@
 import { getAuthUserId } from '@convex-dev/auth/server';
 import { err, isErr, ok } from '#lib/result';
-import { getZonedStartOfDayTimestamp } from '#models/date';
 import {
   calculateStreakUpdate,
   isCompletedIncubation,
@@ -8,6 +7,7 @@ import {
 } from '#models/routine';
 import { calculateDailyCompletionXP } from '#models/xp';
 import { v } from 'convex/values';
+import { startOfDay } from 'date-fns';
 
 import type { Id } from './_generated/dataModel';
 import type { QueryCtx } from './_generated/server';
@@ -100,10 +100,10 @@ export const complete = mutation({
     const profileResult = await getProfileFromCtx(ctx);
     if (isErr(profileResult)) return profileResult;
     const profile = profileResult.value;
-    const { timezone, userId } = profile;
+    const { userId } = profile;
 
     const now = Date.now();
-    const dayStartTimestamp = getZonedStartOfDayTimestamp(now, timezone);
+    const dayStartTimestamp = startOfDay(now).getTime();
 
     const existingCompletion = await ctx.db
       .query('completions')

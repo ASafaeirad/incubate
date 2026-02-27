@@ -1,8 +1,9 @@
 import type { Routine, RoutineState } from '#models/routine';
 
-import { range } from '@fullstacksjs/toolbox';
+import { isNull, range } from '@fullstacksjs/toolbox';
 import { IconTarget } from '@tabler/icons-react';
 import { cn } from '#lib/cn';
+import { isTodayInTimezone } from '#models/date';
 import { Badge } from '#ui/Badge/Badge';
 import { Button } from '#ui/Button/Button';
 import { Card, CardContent, CardHeader } from '#ui/Card/Card';
@@ -13,6 +14,7 @@ interface Props {
   routine: Routine;
   onComplete?: () => void;
   onDelete?: () => void;
+  timezone: string;
 }
 
 const iconMap: Record<RoutineState, typeof IconTarget> = {
@@ -26,8 +28,12 @@ export const RoutineCard = ({
   routine,
   onComplete,
   onDelete: _onDelete,
+  timezone,
 }: Props) => {
   const Icon = iconMap[routine.state];
+  const isCompletedToday =
+    !isNull(routine.lastCompletion) &&
+    isTodayInTimezone(routine.lastCompletion, timezone);
 
   return (
     <Card className="w-96">
@@ -53,7 +59,7 @@ export const RoutineCard = ({
             />
           ))}
         </div>
-        {routine.completedToday ? (
+        {isCompletedToday ? (
           <div className="flex h-8 items-center justify-center bg-primary/10 text-primary">
             Completed
           </div>
