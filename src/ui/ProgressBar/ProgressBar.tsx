@@ -2,6 +2,7 @@ import type { ProgressRootProps } from '@base-ui/react';
 
 import { Progress } from '@base-ui/react';
 import { clamp } from '@fullstacksjs/toolbox';
+import NumberFlow from '@number-flow/react';
 import { cn } from '#lib/cn';
 
 interface ProgressBarProps extends ProgressRootProps {
@@ -31,10 +32,17 @@ export function ProgressBar({
       value={clampedValue}
     >
       <Progress.Track className="col-start-1 col-end-3 h-1 bg-muted">
-        <Progress.Indicator className="bg-primary" />
+        <Progress.Indicator className="bg-primary transition-all duration-500 ease-out" />
       </Progress.Track>
       <Progress.Label>{label}</Progress.Label>
-      <Progress.Value className="place-self-end" />
+      <Progress.Value className="place-self-end">
+        {(_, v) => (
+          <NumberFlow
+            value={((v ?? 0) + min) / (max + min)}
+            format={{ style: 'percent' }}
+          />
+        )}
+      </Progress.Value>
     </Progress.Root>
   );
 }

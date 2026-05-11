@@ -1,4 +1,5 @@
 import preview from '#storybook/preview';
+import { useEffect, useState } from 'react';
 
 import { ProgressBar } from './ProgressBar';
 
@@ -35,5 +36,24 @@ export const Full = meta.story({
   args: {
     value: 100,
     label: 'Done',
+  },
+});
+
+export const Animated = meta.story({
+  render: args => {
+    const [value, setValue] = useState(0);
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setValue(prev => (prev >= 100 ? 0 : prev + Math.random() * 30.5));
+      }, 1000);
+      return () => clearInterval(interval);
+    }, []);
+
+    return (
+      <div style={{ width: 300 }}>
+        <ProgressBar {...args} value={value} />
+      </div>
+    );
   },
 });
