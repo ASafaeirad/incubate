@@ -36,7 +36,7 @@ export function ProgressBar({
         <Progress.Indicator className="bg-primary transition-all duration-500 ease-out" />
       </Progress.Track>
       <Progress.Label>{label}</Progress.Label>
-      <Progress.Value className="place-self-end">
+      <Progress.Value className="text-right">
         {(_, v) => (
           <NumberFlow
             value={((v ?? 0) + min) / (max + min)}
