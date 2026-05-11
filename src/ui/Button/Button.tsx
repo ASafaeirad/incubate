@@ -3,17 +3,17 @@ import type { VariantProps } from 'class-variance-authority';
 import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { cva } from 'class-variance-authority';
 
-import { cn } from '#lib/cn';
+import { cn, join } from '#lib/cn';
 
 const buttonVariants = cva(
-  [
+  join([
     'group/button',
-    'inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding font-medium whitespace-nowrap transition-all select-none',
+    'flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding font-medium whitespace-nowrap transition-all select-none',
     'ring-primary outline-none focus-visible:ring-1',
     'border-border disabled:pointer-events-none disabled:opacity-50',
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:block-4 [&_svg:not([class*='size-'])]:inline-4",
     'hover:bg-background-hover',
-  ].join(''),
+  ]),
   {
     variants: {
       variant: {

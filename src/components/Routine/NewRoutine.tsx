@@ -1,11 +1,15 @@
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import * as v from 'valibot';
 
 import { api } from '#convex/api';
 import { useAppForm } from '#lib/form';
 import { isErr } from '#lib/result';
 
-export function NewRoutine() {
+interface NewRoutineProps {
+  onCreated?: () => void;
+}
+
+export function NewRoutine({ onCreated }: NewRoutineProps) {
   const createRoutine = useMutation(api.routines.create);
 
   const form = useAppForm({
@@ -22,14 +26,9 @@ export function NewRoutine() {
       }
 
       formApi.reset();
+      onCreated?.();
     },
   });
-
-  const routinesResult = useQuery(api.routines.list);
-
-  if (!routinesResult) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <form
@@ -37,15 +36,15 @@ export function NewRoutine() {
         e.preventDefault();
         void form.handleSubmit();
       }}
-      className="rounded-lg flex flex-col gap-3 border border-border p-4 inline-64"
+      className="rounded-lg flex flex-col gap-3 border border-border p-4 inline-full max-inline-md"
     >
-      <h3 className="text-lg font-semibold">New Routine</h3>
+      <h3 className="text-lg font-semibold">New routine</h3>
       <form.AppField name="name">
         {field => <field.TextField placeholder="Routine name" />}
       </form.AppField>
       <form.AppForm>
         <form.SubmitButton className="inline-full">
-          Create Routine
+          Create routine
         </form.SubmitButton>
       </form.AppForm>
     </form>
