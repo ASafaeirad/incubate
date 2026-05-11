@@ -71,12 +71,12 @@ function RouteComponent() {
       <div className="rounded-lg overflow-x-auto border border-border">
         <table className="border-collapse text-sm inline-full">
           <thead>
-            <tr className="border-be border-border bg-muted/50 text-start font-semibold">
+            <tr className="border-be border-border bg-muted/50 text-left font-semibold">
               <th className="px-3 py-2 font-semibold">Name</th>
               <th className="px-3 py-2 font-semibold">State</th>
               <th className="px-3 py-2 font-semibold">Streak</th>
               <th className="px-3 py-2 font-semibold">Today</th>
-              <th className="px-3 py-2 text-end font-semibold">Actions</th>
+              <th className="px-3 py-2 font-semibold">Actions</th>
             </tr>
           </thead>
           <tbody>
