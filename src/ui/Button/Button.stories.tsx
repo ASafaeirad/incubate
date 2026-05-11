@@ -1,4 +1,5 @@
 import { IconStar } from '@tabler/icons-react';
+
 import preview from '#storybook/preview';
 
 import { Button } from './Button';

@@ -1,4 +1,5 @@
 import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar';
+
 import { cn } from '#lib/cn';
 
 interface AvatarProps extends AvatarPrimitive.Image.Props {
@@ -15,14 +16,14 @@ export function Avatar({
     <AvatarPrimitive.Root
       data-slot="avatar"
       className={cn(
-        'group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten',
+        'group/avatar relative flex shrink-0 rounded-full select-none block-8 inline-8 after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten',
         className,
       )}
     >
       <AvatarPrimitive.Image
         data-slot="avatar-image"
         className={cn(
-          'aspect-square size-full rounded-full object-cover',
+          'aspect-square rounded-full object-cover block-full inline-full',
           className,
         )}
         {...props}
@@ -30,7 +31,7 @@ export function Avatar({
       <AvatarPrimitive.Fallback
         data-slot="avatar-fallback"
         className={cn(
-          'flex size-full w-full items-center justify-center overflow-hidden rounded-full bg-muted text-sm text-muted-foreground',
+          'flex items-center justify-center overflow-hidden rounded-full bg-muted text-sm text-muted-foreground block-full inline-full',
           className,
         )}
       >
@@ -41,7 +42,7 @@ export function Avatar({
         <span
           data-slot="avatar-badge"
           className={cn(
-            'absolute right-0 bottom-0 z-10 inline-flex size-2.5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground ring-1 ring-background select-none',
+            'absolute inset-e-0 inset-be-0 z-10 inline-flex items-center justify-center rounded-full bg-primary text-xs text-primary-foreground ring-1 ring-background select-none block-2.5 inline-2.5',
             className,
           )}
         >

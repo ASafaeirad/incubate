@@ -1,6 +1,7 @@
 import { IconAssembly } from '@tabler/icons-react';
-import preview from '#storybook/preview';
 import { addDays } from 'date-fns';
+
+import preview from '#storybook/preview';
 
 import { HabitCard } from './HabitCard';
 

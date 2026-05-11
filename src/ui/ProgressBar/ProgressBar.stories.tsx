@@ -1,5 +1,6 @@
-import preview from '#storybook/preview';
 import { useEffect, useState } from 'react';
+
+import preview from '#storybook/preview';
 
 import { ProgressBar } from './ProgressBar';
 

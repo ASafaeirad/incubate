@@ -1,4 +1,5 @@
 import { getAuthUserId } from '@convex-dev/auth/server';
+
 import { err, isErr, ok } from '#lib/result';
 import { toProfile } from '#models/profile';
 

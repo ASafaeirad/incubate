@@ -1,6 +1,7 @@
 import { createFileRoute, Navigate, Outlet } from '@tanstack/react-router';
-import { Header } from '#components/Header/Header';
 import { useConvexAuth } from 'convex/react';
+
+import { Header } from '#components/Header/Header';
 
 export const Route = createFileRoute('/_authenticated')({
   component: RouteComponent,
@@ -13,7 +14,7 @@ function RouteComponent() {
   if (!isAuthenticated) return <Navigate to="/auth" />;
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex flex-col block-screen">
       <Header />
       <div className="grow">
         <Outlet />

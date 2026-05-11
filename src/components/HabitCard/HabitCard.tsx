@@ -1,7 +1,9 @@
 import type { IconProps } from '@tabler/icons-react';
-import type { Day } from '#models/day';
 
 import { IconFlame } from '@tabler/icons-react';
+
+import type { Day } from '#models/day';
+
 import { cn } from '#lib/cn';
 import { findStreak } from '#models/day';
 import { Button } from '#ui/Button/Button';
@@ -26,8 +28,8 @@ export const HabitCard = ({
   const streak = findStreak(days);
 
   return (
-    <div className="noise w-full max-w-sm p-0">
-      <div className="flex border-b border-border p-0">
+    <div className="noise p-0 inline-full max-inline-sm">
+      <div className="flex border-be border-border p-0">
         <div className="flex flex-1 flex-col gap-1 p-4">
           <div className="flex items-center justify-between">
             <h2
@@ -35,7 +37,7 @@ export const HabitCard = ({
                 'text-muted-foreground': state === 'idle',
               })}
             >
-              <Icon className="size-4" />
+              <Icon className="block-4 inline-4" />
               <span>{title}</span>
             </h2>
             <div
@@ -48,14 +50,14 @@ export const HabitCard = ({
                 { 'text-fire': state === 'active' && streak > 0 },
               )}
             >
-              <IconFlame className="size-3" />
+              <IconFlame className="block-3 inline-3" />
               <span>{streak}</span>
             </div>
           </div>
           <p className="text-disabled-foreground">{children}</p>
         </div>
-        <div className="flex h-24 w-20 flex-col border-l border-border">
-          <Button variant="primary" className="flex-1 border-b">
+        <div className="flex flex-col border-s border-border block-24 inline-20">
+          <Button variant="primary" className="flex-1 border-be">
             Track
           </Button>
           <Button variant="ghost" className="flex-1">
@@ -64,7 +66,7 @@ export const HabitCard = ({
         </div>
       </div>
       <div className="p-4">
-        <div className="flex h-10 w-full justify-between gap-2">
+        <div className="flex justify-between gap-2 block-10 inline-full">
           {days.map(day => (
             <HabitDay key={day.date.getTime()} day={day} />
           ))}

@@ -1,18 +1,19 @@
 import type { VariantProps } from 'class-variance-authority';
 
 import { Button as ButtonPrimitive } from '@base-ui/react/button';
-import { cn } from '#lib/cn';
 import { cva } from 'class-variance-authority';
+
+import { cn } from '#lib/cn';
 
 const buttonVariants = cva(
   [
     'group/button',
     'inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding font-medium whitespace-nowrap transition-all select-none',
-    'outline-none focus-visible:ring-1 ring-primary',
-    'disabled:pointer-events-none disabled:opacity-50 border-border',
-    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    'ring-primary outline-none focus-visible:ring-1',
+    'border-border disabled:pointer-events-none disabled:opacity-50',
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:block-4 [&_svg:not([class*='size-'])]:inline-4",
     'hover:bg-background-hover',
-  ].join(' '),
+  ].join(''),
   {
     variants: {
       variant: {

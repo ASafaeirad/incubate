@@ -1,5 +1,8 @@
 import { useAuthActions } from '@convex-dev/auth/react';
 import { IconLogout } from '@tabler/icons-react';
+import { useMutation, useQuery } from 'convex/react';
+import { useEffect } from 'react';
+
 import { api } from '#convex/api';
 import { isErr } from '#lib/result';
 import { getTotalXpForLevel } from '#models/xp';
@@ -7,8 +10,6 @@ import { Avatar } from '#ui/Avatar/Avatar';
 import { Button } from '#ui/Button/Button';
 import { ProgressBar } from '#ui/ProgressBar/ProgressBar';
 import { Text } from '#ui/Text/Text';
-import { useMutation, useQuery } from 'convex/react';
-import { useEffect } from 'react';
 
 export function Header() {
   const { signOut } = useAuthActions();
@@ -30,7 +31,7 @@ export function Header() {
   const nextLevelXp = getTotalXpForLevel(profile.level + 1);
 
   return (
-    <header className="flex items-center justify-center gap-4 border-b border-border p-4">
+    <header className="flex items-center justify-center gap-4 border-be border-border p-4">
       <div className="flex items-center gap-3">
         <Avatar src={profile.avatar} fallback={profile.name.at(0) ?? 'U'}>
           {profile.level}
@@ -41,7 +42,7 @@ export function Header() {
             value={currentXp}
             min={getTotalXpForLevel(profile.level)}
             max={nextLevelXp}
-            className="w-48"
+            className="inline-48"
             label={`${currentXp} / ${nextLevelXp}`}
           />
         </div>

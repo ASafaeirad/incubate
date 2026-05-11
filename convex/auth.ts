@@ -1,6 +1,7 @@
 import GitHub from '@auth/core/providers/github';
 import { Anonymous } from '@convex-dev/auth/providers/Anonymous';
 import { convexAuth, getAuthUserId } from '@convex-dev/auth/server';
+
 import { err, isErr, ok } from '#lib/result';
 
 import type { QueryCtx } from './_generated/server';

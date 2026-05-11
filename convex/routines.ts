@@ -1,4 +1,7 @@
 import { getAuthUserId } from '@convex-dev/auth/server';
+import { v } from 'convex/values';
+import { startOfDay } from 'date-fns';
+
 import { err, isErr, ok } from '#lib/result';
 import {
   calculateStreakUpdate,
@@ -6,8 +9,6 @@ import {
   toRoutine,
 } from '#models/routine';
 import { calculateDailyCompletionXP } from '#models/xp';
-import { v } from 'convex/values';
-import { startOfDay } from 'date-fns';
 
 import type { Id } from './_generated/dataModel';
 import type { QueryCtx } from './_generated/server';

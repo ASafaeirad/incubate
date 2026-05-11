@@ -1,4 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { useMutation, useQuery } from 'convex/react';
+
 import { NewRoutine } from '#components/Routine/NewRoutine';
 import {
   RoutineCard,
@@ -6,7 +8,6 @@ import {
 } from '#components/Routine/RoutineCard';
 import { api } from '#convex/api';
 import { isErr } from '#lib/result';
-import { useMutation, useQuery } from 'convex/react';
 
 export const Route = createFileRoute('/_authenticated/')({
   component: RouteComponent,
@@ -20,7 +21,7 @@ function RouteComponent() {
 
   if (!profileResult || !routinesResult) {
     return (
-      <div className="flex h-full flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4 block-full">
         <RoutineCardSkeleton />
       </div>
     );
@@ -40,7 +41,7 @@ function RouteComponent() {
   const isRoutineAvailable = profile.routines > routines.length;
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4">
+    <div className="flex flex-col items-center justify-center gap-4 block-full">
       <div className="flex flex-wrap gap-4">
         {routines.map(routine => (
           <RoutineCard

@@ -1,8 +1,9 @@
+import { useMutation, useQuery } from 'convex/react';
+import * as v from 'valibot';
+
 import { api } from '#convex/api';
 import { useAppForm } from '#lib/form';
 import { isErr } from '#lib/result';
-import { useMutation, useQuery } from 'convex/react';
-import * as v from 'valibot';
 
 export function NewRoutine() {
   const createRoutine = useMutation(api.routines.create);
@@ -36,15 +37,16 @@ export function NewRoutine() {
         e.preventDefault();
         void form.handleSubmit();
       }}
-      className="rounded-lg flex w-64 flex-col gap-3 border border-border p-4"
+      className="rounded-lg flex flex-col gap-3 border border-border p-4 inline-64"
     >
       <h3 className="text-lg font-semibold">New Routine</h3>
-      <form.AppField
-        name="name"
-        children={field => <field.TextField placeholder="Routine name" />}
-      />
+      <form.AppField name="name">
+        {field => <field.TextField placeholder="Routine name" />}
+      </form.AppField>
       <form.AppForm>
-        <form.SubmitButton className="w-full">Create Routine</form.SubmitButton>
+        <form.SubmitButton className="inline-full">
+          Create Routine
+        </form.SubmitButton>
       </form.AppForm>
     </form>
   );

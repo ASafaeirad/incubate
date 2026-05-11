@@ -1,8 +1,9 @@
 import type { VariantProps } from 'class-variance-authority';
 
 import { useRender } from '@base-ui/react';
-import { cn } from '#lib/cn';
 import { cva } from 'class-variance-authority';
+
+import { cn } from '#lib/cn';
 
 const headingVariants = cva('font-bold text-foreground', {
   variants: {
