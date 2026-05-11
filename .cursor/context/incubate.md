@@ -14,6 +14,8 @@ Don't change `src/routeTree.gen.ts`. it's will be generated automatically.
 
 **Typing:** Module augmentation in `maie.tsx` registers the router type for `Link`, `useNavigate`, etc.
 
+**Typography**: Please use `src/ui/Text/Text.tsx` for texts and typography.
+
 # TanStack Form in Incubate
 
 **Pattern:** App-wide form hook from `createFormHook` in `src/lib/form/form.tsx` — exports `useAppForm`, `withForm`, `withFieldGroup`. Re-exports live in `src/lib/form/index.ts` (import as `#lib/form`).

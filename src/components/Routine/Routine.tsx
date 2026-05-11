@@ -18,6 +18,7 @@ import { Badge } from '#ui/Badge/Badge';
 import { Button } from '#ui/Button/Button';
 import { Card, CardContent, CardFooter, CardHeader } from '#ui/Card/Card';
 import { Heading } from '#ui/Heading/Heading';
+import { Text } from '#ui/Text/Text';
 
 interface Props {
   routine: Routine;
@@ -114,18 +115,10 @@ export const RoutineCard = ({
             'text-fire': streak > 0,
           })}
         />
-        <span
-          className={cn('text-sm font-semibold tabular-nums', {
-            'text-muted-foreground': streak === 0,
-          })}
-        >
+        <Text weight="semibold" variant={streak === 0 ? 'muted' : 'default'}>
           {streak} day{streak === 1 ? '' : 's'}
-        </span>
-        {isCompletedToday && (
-          <span className="ms-auto text-xs text-muted-foreground">
-            Done today
-          </span>
-        )}
+        </Text>
+        {isCompletedToday && <Text variant="muted">Done today</Text>}
       </CardContent>
       <CardFooter className="flex flex-wrap justify-end gap-2 border-bs border-border">
         {onDelete && (
@@ -170,7 +163,9 @@ export const RoutineTableRow = ({
       <td className="px-3 py-2 text-start max-inline-xs">
         <div className="flex items-center gap-2 min-inline-0">
           <Icon className="shrink-0 text-muted-foreground block-4 inline-4" />
-          <span className="truncate font-medium">{routine.name}</span>
+          <Text weight="medium" className="truncate">
+            {routine.name}
+          </Text>
         </div>
       </td>
       <td className="px-3 py-2 text-start">
@@ -186,17 +181,20 @@ export const RoutineTableRow = ({
               'text-fire': streak > 0,
             })}
           />
-          <span
-            className={cn('text-sm font-semibold tabular-nums', {
-              'text-muted-foreground': streak === 0,
-            })}
+          <Text
+            size="sm"
+            weight="semibold"
+            variant={streak === 0 ? 'muted' : 'default'}
+            className="tabular-nums"
           >
             {streak}
-          </span>
+          </Text>
         </div>
       </td>
-      <td className="px-3 py-2 text-start text-xs text-muted-foreground">
-        {isCompletedToday ? 'Done today' : '—'}
+      <td className="px-3 py-2 text-start">
+        <Text size="sm" variant="muted">
+          {isCompletedToday ? 'Done today' : '—'}
+        </Text>
       </td>
       <td className="px-3 py-2 text-end">
         <div className="flex flex-wrap items-center justify-end gap-2">
